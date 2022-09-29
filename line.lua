@@ -121,21 +121,20 @@ local lib = {
 -- https://gamesense.pub/forums/viewtopic.php?id=39951
 -- Thanks @xkeksbyte!
 local function get_nearest_enemy(plocal, enemies)
-	local lx, ly, lz = client.eye_position()
-	local view_x, view_y, roll = client.camera_angles()
+    local lx, ly, lz = client.eye_position()
+    local view_x, view_y, roll = client.camera_angles()
 
-	local bestenemy = nil
+    local bestenemy = nil
     local fov = 180
     for i=1, #enemies do
         local cur_x, cur_y, cur_z = entity.get_prop(enemies[i], "m_vecOrigin")
         local cur_fov = math.abs(lib.normalize_yaw(lib.deg(lx - cur_x, ly - cur_y) - view_y + 180))
         if cur_fov < fov then
-			fov = cur_fov
-			bestenemy = enemies[i]
-		end
+	    fov = cur_fov
+	    bestenemy = enemies[i]
 	end
-
-	return bestenemy
+    end
+    return bestenemy
 end
 
 local function ui_setting()
